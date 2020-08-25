@@ -62,19 +62,15 @@ def validate(bo, pos, num):
 def solve(bo):
     empty = find_empty(bo)
     counter = 0
-
+    
     while True:
-        if counter == len(empty) - 1:
-            break
-        temp = empty[counter]
-        for num in range(bo[temp[0]][temp[1]] + 1, 10):
-            if validate(bo, temp, num):
-                bo[temp[0]][temp[1]] = num
-                counter += 1
-                break
-            counter -= 1
+        try:
+          temp = empty[counter]
+        except:
+          break
+        counter += 1
 
 
 solve(board)
 
-print_board(board)
+
