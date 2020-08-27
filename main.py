@@ -25,12 +25,13 @@ def print_board(bo):
 
 
 def find_empty(bo):
-    empty = []
+
     for i in range(len(bo)):
         for j in range(len(bo[0])):
             if bo[i][j] == 0:
-                empty.append((i, j))
-    return empty
+                empty = ((i, j))
+                return empty
+    return None
 
 
 def validate(bo, pos, num):
@@ -61,16 +62,20 @@ def validate(bo, pos, num):
 
 def solve(bo):
     empty = find_empty(bo)
-    counter = 0
     
-    while True:
-        try:
-          temp = empty[counter]
-        except:
-          break
-        counter += 1
+    if not empty:
+      return True
+    else:
+      row, col = empty
 
+    for i in range(1, 10):
+      if validate(bo, (row, col), i):
+        bo[row][col] = i
+        if solve(bo):
+          return True
+        bo[row][col] = 0
 
+    return False 
 solve(board)
-
+print_board(board)
 
